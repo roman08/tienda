@@ -20,9 +20,16 @@ Route::get('/home', 'HomeController@index')->name('home');
 /**
  * Rutas productos
  */
-Route::name('product.index')->get('/admin/products','AdminProductController@index');//listado
-Route::name('product.create')->get('/admin/products/create', 'AdminProductController@create'); //crear
-Route::name('product.store')->post('/admin/products','AdminProductController@store'); //guarda
-Route::name('product.edit')->get('/admin/products/{id}/edit','AdminProductController@edit'); //formulario edición
-Route::name('product.update')->post('/admin/products/{id}/update','AdminProductController@update'); //actualizar
-Route::name('product.delete')->delete('/admin/products/{id}','AdminProductController@destroy'); //delete
+
+Route::middleware(['auth','admin'])->prefix('admin')->group(function(){
+	Route::name('product.index')->get('/products','AdminProductController@index');//listado
+	Route::name('product.create')->get('/products/create', 'AdminProductController@create'); //crear
+	Route::name('product.store')->post('/products','AdminProductController@store'); //guarda
+	Route::name('product.edit')->get('/products/{id}/edit','AdminProductController@edit'); //formulario edición
+	Route::name('product.update')->post('/products/{id}/update','AdminProductController@update'); //actualizar
+	Route::name('product.delete')->delete('/products/{id}','AdminProductController@destroy'); //delete
+	Route::name('product.image')->get('/product/{id}/images','ImageController@index'); //listado de imagenes
+	Route::name('product.image.create')->post('/product/{id}/images','ImageController@store'); //registrar imagen
+	Route::name('product.image.delete')->delete('/product/{id}/images','ImageController@destroy'); //form eliminar
+});
+
