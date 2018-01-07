@@ -24,7 +24,7 @@
             @endif
 
             <ul class="nav nav-pills nav-pills-primary" role="tablist">
-                <li>
+                <li class="active">
                     <a href="#dashboard" role="tab" data-toggle="tab">
                         <i class="material-icons">dashboard</i>
                         Carrito de compras
@@ -37,7 +37,46 @@
                     </a>
                 </li>
             </ul>
+            <hr>
+            <p>Tu carito de compras presenta {{auth()->user()->cart->details->count()}} productos.</p>
+            <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th class="text-center">Nombre</th>
+                            <th>Precios</th>
+                            <th>Catidad</th>
+                            <th>SubTotal</th>
+                            <th>Opiones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(auth()->user()->cart->details as $detail)
+                            <tr>
+                                <td class="text-center">
+                                    <img src="{{ $detail->product->featured_image_url }}" height="50" alt="">
+                                </td>
+                                <td><a href="{{route('product.show',['id' => $detail->product->id])}}" target="_blank">{{ $detail->product->name}}</a></td>
+                                <td >$ {{ $detail->product->price}}</td>
+                                <td>{{$detail->quantity}}</td>
+                                <td>${{$detail->quantity * $detail->product->price}}</td>
+                                <td class="td-actions">
+                                    <form  action="{{ route('product.cart.delete',['id' => $detail->id]) }}" method="post">
+                                        {{ csrf_field()}}
+                                        {{ method_field('DELETE')}}
+                                        <a rel="tooltip" title="Ver producto" href="{{route('product.show',['id' => $detail->product->id])}}" target="_blank" class="btn btn-info btn-simple btn-xs">
+                                            <i class="fa fa-info"></i>
+                                        </a>
+                                        <button  rel="tooltip" title="Eliminar producto" class="btn btn-danger btn-simple btn-xs">
+                                            <i class="fa fa-times"></i>
+                                        </button>                                            
+                                    </form>
 
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>            
         </div>
 
 </div>

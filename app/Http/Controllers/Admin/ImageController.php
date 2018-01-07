@@ -128,5 +128,6 @@ class ImageController extends Controller
         $productImage->featured = true;
         $productImage->save();
 
+        return redirect()->back();
     }
 }

@@ -28,7 +28,7 @@
                         <div class="col-md-4">
                             <div class="panel panel-default">
                               <div class="panel-body">
-                                <img src="{{$image->url}}" alt="">
+                                <img src="{{$image->url}}" alt="" width="250">
                                 <form action="{{ route('product.image.delete',['id' => $image->id]) }}" method="post">
                                     {{ csrf_field()}}
                                     {{ method_field('DELETE')}}

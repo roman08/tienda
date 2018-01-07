@@ -47,6 +47,9 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="{{ route('home') }}">Dashboard</a>
+                                    </li>
                                     @if(auth()->user()->admin)
                                     <li>
                                         <a href="{{ route('product.index') }}">Gestionar productos</a>

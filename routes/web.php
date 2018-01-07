@@ -18,7 +18,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //detalle del producto
-Route::name('product.show')->get('product/detalle/{id}','ProductsController@show');
+Route::name('product.show')->get('/product/detalle/{id}','ProductsController@show');
+
+Route::name('producto.carrito')->post('/producto/agregar/carrito','CartDetailController@store');
+Route::name('product.cart.delete')->delete('/product/{id}/cart/delete','CartDetailController@destroy'); //form eliminar
 /**
  * Rutas productos
  */
