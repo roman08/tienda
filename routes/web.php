@@ -17,11 +17,13 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+//detalle del producto
+Route::name('product.show')->get('product/detalle/{id}','ProductsController@show');
 /**
  * Rutas productos
  */
 
-Route::middleware(['auth','admin'])->prefix('admin')->group(function(){
+Route::middleware(['auth','admin'])->prefix('admin')->namespace('Admin')->group(function(){
 	Route::name('product.index')->get('/products','AdminProductController@index');//listado
 	Route::name('product.create')->get('/products/create', 'AdminProductController@create'); //crear
 	Route::name('product.store')->post('/products','AdminProductController@store'); //guarda
@@ -31,5 +33,6 @@ Route::middleware(['auth','admin'])->prefix('admin')->group(function(){
 	Route::name('product.image')->get('/product/{id}/images','ImageController@index'); //listado de imagenes
 	Route::name('product.image.create')->post('/product/{id}/images','ImageController@store'); //registrar imagen
 	Route::name('product.image.delete')->delete('/product/{id}/images','ImageController@destroy'); //form eliminar
+	Route::name('product.image.destacar')->get('/product/{id}/images/select/{image}','ImageController@select'); //destacar iamgen
 });
 

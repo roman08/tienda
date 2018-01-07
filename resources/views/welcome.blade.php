@@ -3,6 +3,24 @@
 @section('title','Bienvenido a ChocoMercado')
 @section('body-class','landing-page')
 
+@section('styles')
+    <style>
+        .team .row .col-md-4{
+            margin-bottom: 3em;
+        }
+        .row {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .row > [class*="col-*"] {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+@endsection
 
 @section('content')
 <div class="header header-filter" style="background-image: url('https://images.unsplash.com/photo-1423655156442-ccc11daa4e99?crop=entropy&dpr=2&fit=crop&fm=jpg&h=750&ixjsv=2.1.0&ixlib=rb-0.3.5&q=50&w=1450');">
@@ -71,17 +89,19 @@
         @foreach($products as $product)
             <div class="col-md-4">
                 <div class="team-player">
-                    <img src="{{ $product->images->first()->image}}" alt="Thumbnail Image" class="img-raised img-circle">
-                    <h4 class="title">{{$product->name}} <br />
+                    <img src="{{ $product->featured_image_url}}" alt="Thumbnail Image" class="img-raised img-circle">
+                    <h4 class="title">
+                        <a href="{{route('product.show',['id' => $product->id])}}">{{$product->name}} </a>
+                        <br />
                         <small class="text-muted">{{$product->category->name}}</small>
                     </h4>
                     <p class="description">{{ $product->description}}<a href="#">links</a> for people to be able to follow them outside the site.</p>
-                    <a href="#pablo" class="btn btn-simple btn-just-icon"><i class="fa fa-twitter"></i></a>
-                    <a href="#pablo" class="btn btn-simple btn-just-icon"><i class="fa fa-instagram"></i></a>
-                    <a href="#pablo" class="btn btn-simple btn-just-icon btn-default"><i class="fa fa-facebook-square"></i></a>
                 </div>
             </div>
         @endforeach
+        </div>
+        <div class="text-center">
+            {{$products->links()}}
         </div>
     </div>
 

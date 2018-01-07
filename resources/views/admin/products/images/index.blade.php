@@ -33,6 +33,15 @@
                                     {{ csrf_field()}}
                                     {{ method_field('DELETE')}}
                                     <button class="btn btn-danger btn-round">Eliminar imagen</button>
+                                    @if($image->featured)
+                                        <button type="button" class="btn btn-info btn-fab btn-fab-mini btn-round" rel="tooltip" title="Imagen destacada del producto" >
+                                        <i class="material-icons">favorite</i>
+                                    </button>
+                                    @else
+                                        <a href="{{ route('product.image.destacar',['id' => $product->id, 'image' => $image->id])}}" class="btn btn-primary btn-fab btn-fab-mini btn-round">
+                                            <i class="material-icons">favorite</i>
+                                        </a>
+                                    @endif
                                 </form>
                               </div>
                             </div>
