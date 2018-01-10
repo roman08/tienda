@@ -22,6 +22,7 @@ Route::name('product.show')->get('/product/detalle/{id}','ProductsController@sho
 
 Route::name('producto.carrito')->post('/producto/agregar/carrito','CartDetailController@store');
 Route::name('product.cart.delete')->delete('/product/{id}/cart/delete','CartDetailController@destroy'); //form eliminar
+Route::name('carrito.orden')->post('/orden','CartController@update');
 /**
  * Rutas productos
  */

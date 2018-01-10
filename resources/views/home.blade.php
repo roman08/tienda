@@ -17,9 +17,9 @@
         <div class="section ">
             <h2 class="title text-center">Dashboard</h2>
             
-            @if (session('status'))
+            @if (session('notification'))
                 <div class="alert alert-success">
-                    {{ session('status') }}
+                    {{ session('notification') }}
                 </div>
             @endif
 
@@ -40,43 +40,52 @@
             <hr>
             <p>Tu carito de compras presenta {{auth()->user()->cart->details->count()}} productos.</p>
             <table class="table">
-                    <thead>
+                <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Nombre</th>
+                        <th>Precios</th>
+                        <th>Catidad</th>
+                        <th>SubTotal</th>
+                        <th>Opiones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(auth()->user()->cart->details as $detail)
                         <tr>
-                            <th class="text-center">#</th>
-                            <th class="text-center">Nombre</th>
-                            <th>Precios</th>
-                            <th>Catidad</th>
-                            <th>SubTotal</th>
-                            <th>Opiones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach(auth()->user()->cart->details as $detail)
-                            <tr>
-                                <td class="text-center">
-                                    <img src="{{ $detail->product->featured_image_url }}" height="50" alt="">
-                                </td>
-                                <td><a href="{{route('product.show',['id' => $detail->product->id])}}" target="_blank">{{ $detail->product->name}}</a></td>
-                                <td >$ {{ $detail->product->price}}</td>
-                                <td>{{$detail->quantity}}</td>
-                                <td>${{$detail->quantity * $detail->product->price}}</td>
-                                <td class="td-actions">
-                                    <form  action="{{ route('product.cart.delete',['id' => $detail->id]) }}" method="post">
-                                        {{ csrf_field()}}
-                                        {{ method_field('DELETE')}}
-                                        <a rel="tooltip" title="Ver producto" href="{{route('product.show',['id' => $detail->product->id])}}" target="_blank" class="btn btn-info btn-simple btn-xs">
-                                            <i class="fa fa-info"></i>
-                                        </a>
-                                        <button  rel="tooltip" title="Eliminar producto" class="btn btn-danger btn-simple btn-xs">
-                                            <i class="fa fa-times"></i>
-                                        </button>                                            
-                                    </form>
+                            <td class="text-center">
+                                <img src="{{ $detail->product->featured_image_url }}" height="50" alt="">
+                            </td>
+                            <td><a href="{{route('product.show',['id' => $detail->product->id])}}" target="_blank">{{ $detail->product->name}}</a></td>
+                            <td >$ {{ $detail->product->price}}</td>
+                            <td>{{$detail->quantity}}</td>
+                            <td>${{$detail->quantity * $detail->product->price}}</td>
+                            <td class="td-actions">
+                                <form  action="{{ route('product.cart.delete',['id' => $detail->id]) }}" method="post">
+                                    {{ csrf_field()}}
+                                    {{ method_field('DELETE')}}
+                                    <a rel="tooltip" title="Ver producto" href="{{route('product.show',['id' => $detail->product->id])}}" target="_blank" class="btn btn-info btn-simple btn-xs">
+                                        <i class="fa fa-info"></i>
+                                    </a>
+                                    <button  rel="tooltip" title="Eliminar producto" class="btn btn-danger btn-simple btn-xs">
+                                        <i class="fa fa-times"></i>
+                                    </button>                                            
+                                </form>
 
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>            
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>    
+            </table>  
+            <div class="text-center">
+                <form action="{{route('carrito.orden')}}" method="post">
+                {{csrf_field()}}
+                    <button class="btn btn-primary btn-round">
+                        <i class="material-icons">done</i> Realizar pedido
+                    </button>                          
+                </form>
+            </div>
+
         </div>
 
 </div>
