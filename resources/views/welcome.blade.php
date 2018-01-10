@@ -82,26 +82,23 @@
 </div>
 
 <div class="section text-center">
-    <h2 class="title">Productos disponibles</h2>
+    <h2 class="title">Viaitas nuestas categorías</h2>
 
     <div class="team">
         <div class="row">
-        @foreach($products as $product)
+        @foreach($categories as $category)
             <div class="col-md-4">
                 <div class="team-player">
-                    <img src="{{ $product->featured_image_url}}" alt="Thumbnail Image" class="img-raised img-circle">
+                    <img src="{{ $category->featured_image_url}}" alt="Thumbnail Image" class="img-raised img-circle">
                     <h4 class="title">
-                        <a href="{{route('product.show',['id' => $product->id])}}">{{$product->name}} </a>
+                        <a href="{{route('category.show',['id' => $category->id])}}">{{$category->name}} </a>
                         <br />
-                        <small class="text-muted">{{$product->category->name}}</small>
+                        <small class="text-muted">{{$category->category_name}}</small>
                     </h4>
-                    <p class="description">{{ $product->description}}<a href="#">links</a> for people to be able to follow them outside the site.</p>
+                    <p class="description">{{ $category->description}}<a href="#">links</a> for people to be able to follow them outside the site.</p>
                 </div>
             </div>
         @endforeach
-        </div>
-        <div class="text-center">
-            {{$products->links()}}
         </div>
     </div>
 

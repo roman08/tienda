@@ -52,6 +52,9 @@
                                     </li>
                                     @if(auth()->user()->admin)
                                     <li>
+                                        <a href="{{ route('category.index') }}">Gestionar categorias</a>
+                                    </li>
+                                    <li>
                                         <a href="{{ route('product.index') }}">Gestionar productos</a>
                                     </li>
                                     @endif

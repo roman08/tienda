@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Category;
 use App\Product;
 class ProductsController extends Controller
 {
     public function index()
     {
-    	$products = Product::paginate(9);
-    	return view('welcome')->with(compact('products'));
+    	$categories = Category::has('products')->get();
+    	return view('welcome')->with(compact('categories'));
     }
 
     public function show($id)

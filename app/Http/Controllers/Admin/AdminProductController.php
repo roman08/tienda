@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Product;
+use App\Category;
 class AdminProductController extends Controller
 {
     /**
@@ -14,7 +15,7 @@ class AdminProductController extends Controller
     public function index()
     {
         $products = Product::paginate(10);
-        //dd($products);
+
         return view('admin.products.index')->with(compact('products'));
     }
 
@@ -25,7 +26,9 @@ class AdminProductController extends Controller
      */
     public function create()
     {
-        return view('admin.products.create');
+        $categories =  Category::orderBy('name')->get();
+
+        return view('admin.products.create')->with(compact('categories'));
     }
 
     /**
@@ -57,6 +60,8 @@ class AdminProductController extends Controller
         $product->description = $request->input('description');
         $product->price = $request->input('price');
         $product->long_description = $request->input('long_description');
+        $product->category_id = ($request->input('category_id') == 0)? null : $request->input('category_id');
+
         $product->save();
 
         return redirect('/admin/products');
@@ -82,7 +87,8 @@ class AdminProductController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
-        return view('admin.products.edit')->with(compact('product'));
+        $categories =  Category::orderBy('name')->get();
+        return view('admin.products.edit')->with(compact('product','categories'));
     }
 
     /**
@@ -116,6 +122,8 @@ class AdminProductController extends Controller
         $product->description = $request->input('description');
         $product->price = $request->input('price');
         $product->long_description = $request->input('long_description');
+        $product->category_id = ($request->input('category_id') == 0)? null : $request->input('category_id');
+
         $product->save();
 
         return redirect('/admin/products');
