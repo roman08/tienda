@@ -21,6 +21,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::name('product.show')->get('/product/detalle/{id}','ProductsController@show');
 Route::name('category.show')->get('/category/detalle/{category}','CategoryController@show');
 
+//rutas buscador
+Route::name('products.search')->get('/productos/search','SearchController@show');
+Route::name('products.json')->get('/productos/json','SearchController@data');
+
 Route::name('producto.carrito')->post('/producto/agregar/carrito','CartDetailController@store');
 Route::name('product.cart.delete')->delete('/product/{id}/cart/delete','CartDetailController@destroy'); //form eliminar
 Route::name('carrito.orden')->post('/orden','CartController@update');
