@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Bienvenido a ChocoMercado')
+@section('title','Bienvenido a' . config('app.name'))
 @section('body-class','landing-page')
 
 @section('styles')
@@ -67,7 +67,7 @@
 <div class="container">
 <div class="row">
     <div class="col-md-6">
-        <h1 class="title">Bienvenido a ChocoMercado</h1>
+        <h1 class="title">Bienvenido a {{config('app.name')}}</h1>
         <h4>Realiza pedidos en línea y te contactaremos para coordinar la entrega.</h4>
         <br>
         <a href="#" class="btn btn-danger btn-raised btn-lg">
@@ -155,31 +155,27 @@
         <div class="col-md-8 col-md-offset-2">
             <h2 class="text-center title">¡Aún no te has registrado</h2>
             <h4 class="text-center description">Registrate ingresando tus datos b'asicos y podrás realizar tus pedidos a travéz de nuesto carrito de compras. Si aun no tedecides, de todas formas, con tu cuenta de usuraio podras hacer todas tus consultas sin compromio.</h4>
-            <form class="contact-form">
+            <form class="contact-form" method="get" action="{{ url('/register') }}">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group label-floating">
                             <label class="control-label">Nombre</label>
-                            <input type="email" class="form-control">
+                            <input type="text" class="form-control" name="name">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group label-floating">
                             <label class="control-label">Correo electronico</label>
-                            <input type="email" class="form-control">
+                            <input type="email" class="form-control" name="email">
                         </div>
                     </div>
                 </div>
 
-                <div class="form-group label-floating">
-                    <label class="control-label">Tu mensaje</label>
-                    <textarea class="form-control" rows="4"></textarea>
-                </div>
 
                 <div class="row">
                     <div class="col-md-4 col-md-offset-4 text-center">
                         <button class="btn btn-primary btn-raised">
-                            ENVIAR CONSULTA
+                            INICIAR REGISTRO
                         </button>
                     </div>
                 </div>
