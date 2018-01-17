@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Bienvenido a ChocoMercado')
+@section('title','Bienvenido a' . config('app.name'))
 @section('body-class','landing-page')
 
 @section('styles')
@@ -67,7 +67,7 @@
 <div class="container">
 <div class="row">
     <div class="col-md-6">
-        <h1 class="title">Bienvenido a ChocoMercado</h1>
+        <h1 class="title">Bienvenido a {{config('app.name')}}</h1>
         <h4>Realiza pedidos en línea y te contactaremos para coordinar la entrega.</h4>
         <br>
         <a href="#" class="btn btn-danger btn-raised btn-lg">

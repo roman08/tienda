@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\ProductImage;
 use File;
+use Image;
+
 class ImageController extends Controller
 {
     /**
@@ -40,9 +42,10 @@ class ImageController extends Controller
     {
         $datos = $request->all();
         $file = $datos['photo'];
-        $path = public_path() . '/images/products';
+        $path = public_path() . '/images/products/';
         $fileName = uniqid() . $file->getClientOriginalName();
-        $move = $file->move($path, $fileName);
+        $move = Image::make($file->getRealPath())->resize(350, 350)->save($path.$fileName);
+        //$move = $file->move($path, $fileName);
 
         if($move)
         {
