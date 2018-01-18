@@ -23,6 +23,7 @@
                                 <th class="text-center">#</th>
                                 <th class="col-md-2 text-center">Nombre</th>
                                 <th class="col-md-5 text-center">Decripción</th>
+                                <th>Imagen</th>
                                 <th class="text-right">Opiones</th>
                             </tr>
                         </thead>
@@ -32,6 +33,7 @@
                                     <td class="text-center">{{ ($key+1) }}</td>
                                     <td>{{ $category->name}}</td>
                                     <td>{{ $category->description }}</td>
+                                    <td><img src="{{ $category->featured_image_url}}" alt="" height="50"></td>
                                     <td class="td-actions text-right">
                                         <form  action="{{ route('category.delete',['id' => $category->id]) }}" method="post">
                                             {{ csrf_field()}}

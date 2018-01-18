@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Category;
+use Image;
+use File;
 class CategoryController extends Controller
 {
     /**
@@ -38,8 +40,22 @@ class CategoryController extends Controller
     {
         $this->validate($request, Category::$rules, Category::$messages);
 
-        Category::create($request->all());
+        $category = Category::create($request->only('name','description'));
 
+        if($request->hasFile('image'))
+        {
+            $file = $request->file('image');
+            $path = public_path() . '/images/categories/';
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $move = Image::make($file->getRealPath())->resize(350, 350)->save($path.$fileName);
+            //$move = $file->move($path, $fileName);
+
+            if($move)
+            {
+                $category->image = $fileName;
+                $category->save();            
+            }
+        }
         return redirect('/admin/category');
     }
 
@@ -77,8 +93,30 @@ class CategoryController extends Controller
         
         $this->validate($request, Category::$rules, Category::$messages);
         
-        $category->update($request->all());
+        $category->update($request->only('name','description'));
+        
+        if($request->hasFile('image'))
+        {
+            $file = $request->file('image');
+            $path = public_path() . '/images/categories/';
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $move = Image::make($file->getRealPath())->resize(350, 350)->save($path.$fileName);
+            //$move = $file->move($path, $fileName);
 
+            if($move)
+            {
+                $previosPath = $path . '/' . $category->image;
+                
+                
+                $category->image = $fileName;
+                $saved = $category->save();    
+
+                if($saved){
+                    File::delete($previosPath);        
+                }
+
+            }
+        }
         return redirect('/admin/category');
     }
 

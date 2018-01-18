@@ -15,7 +15,11 @@ class UserTableSeeder extends Seeder
         	'name' => 'Varekay',
         	'email' => 'rmcentinela@gmail.com',
         	'password' => bcrypt('123456'),
-            'admin' => true
+            'admin' => true,
+            'username' => 'varekay',
+            'phone' => '9141222315',
+            'adress' => 'centro'
+
         ]);
     }
 }
