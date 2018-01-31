@@ -114,7 +114,7 @@
                         <i class="material-icons">fingerprint</i>
                     </div>
                     <h4 class="info-title">Información privada</h4>
-                    <p>Los pedidos que realices sólo los conoceras tú a travéz de de usurario, naie mas tiene acceso a esta información.</p>
+                    <p>Los pedidos que realices sólo los conoceras tú a través de tu usurario, nadie mas tiene acceso a esta información.</p>
                 </div>
             </div>
         </div>
@@ -122,7 +122,7 @@
 </div>
 
 <div class="section text-center">
-    <h2 class="title">Viaitas nuestas categorías</h2>
+    <h2 class="title">Visita nuestras categorías</h2>
         <form action="{{route('products.search')}}" method="get" class="form-inline">
             <input type="text" placeholder="¿Que producto buscas?" class="form-control" name="query" id="search">
             <button class="btn btn-primary btn-just-icon" type="submit">

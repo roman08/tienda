@@ -25,7 +25,7 @@
             </ul>
         </nav>
         <div class="copyright pull-right">
-            &copy; 2016, made with <i class="fa fa-heart heart"></i> by Creative Tim
+            &copy; 2016, <i class="fa fa-heart heart"></i> Román madrigal
         </div>
     </div>
 </footer>
